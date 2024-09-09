@@ -1,0 +1,56 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:Simple_PMS.ViewModels"
+        mc:Ignorable="d" Width="600" Height="400"
+        x:Class="Simple_PMS.Views.NewUserWindow"
+        x:DataType="vm:NewUserWindowViewModel"
+        Title="Новый пользователь"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Assets/avalonia-logo.ico">
+  <Grid Margin="5" RowDefinitions="30*, 30*, 30*, 30*, 30*">
+    <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
+      <TextBlock HorizontalAlignment="Center" Margin="30, 30"
+         FontSize="14" Text="Логин" Width="50"/>
+      <TextBox x:Name="UsernameBox" Text="{Binding Username}"
+               VerticalAlignment="Center" HorizontalAlignment="Right"
+               Width="400" Height="30" MaxLength="20"/>
+    </StackPanel>
+    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+      <TextBlock HorizontalAlignment="Center" Margin="30, 30"
+         FontSize="14" Text="Пароль" Width="50"/>
+      <TextBox x:Name="PasswordBox" Text="{Binding Password}"
+               VerticalAlignment="Center" HorizontalAlignment="Right"
+               Width="400" Height="30"
+               MaxLength="20" AcceptsReturn = "True" TextWrapping = "Wrap"/>
+    </StackPanel>
+    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
+      <TextBlock HorizontalAlignment="Center" Margin="30, 30"
+         FontSize="14" Text="ФИО" Width="50"/>
+      <TextBox x:Name="NameBox" Text="{Binding Name}"
+               VerticalAlignment="Center" HorizontalAlignment="Right"
+               Width="400" Height="30"
+               MaxLength="100" AcceptsReturn = "True" TextWrapping = "Wrap"/>
+    </StackPanel>
+    <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center">
+      <TextBlock HorizontalAlignment="Center" Margin="30, 30"
+         FontSize="14" Text="Роль" Width="50"/>
+      <ComboBox VerticalAlignment="Center" HorizontalAlignment="Right"
+                ItemsSource="{Binding Roles}" Width="150"
+                SelectedValue="{Binding Role}"
+                />
+    </StackPanel>
+    <Button Grid.Row="4" Margin="-150, 0, 0, 0"
+            HorizontalAlignment="Center" VerticalAlignment="Center"
+            Content="OK" Width="100" Height="30" HorizontalContentAlignment="Center"
+            Command="{Binding SaveUser}">
+    </Button>
+    <Button Grid.Row="4" Margin="150, 0, 0, 0"
+        HorizontalAlignment="Center" VerticalAlignment="Center"
+        Content="Отмена" Width="100" Height="30" HorizontalContentAlignment="Center"
+        Command="{Binding Cancel}">
+    </Button>
+  </Grid>
+</Window>

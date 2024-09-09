@@ -1,0 +1,39 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:Simple_PMS.ViewModels"
+        mc:Ignorable="d" Width="600" Height="400"
+        x:Class="Simple_PMS.Views.NewTaskWindow"
+        x:DataType="vm:NewTaskWindowViewModel"
+        Title="Новый таск"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Assets/avalonia-logo.ico">
+  <Grid Margin="5" RowDefinitions="30*, 30*, 30*">
+    <StackPanel Grid.Row="0" Orientation="Horizontal">
+      <TextBlock HorizontalAlignment="Center" Margin="30, 40"
+         FontSize="14" Text="Название"/>
+      <TextBox x:Name="Name" Text="{Binding Name}"
+               VerticalAlignment="Top" Margin="0, 35, 0, 0" Width="400" Height="30"
+               MaxLength="100"/>
+    </StackPanel>
+    <StackPanel Grid.Row="1" Orientation="Horizontal">
+      <TextBlock HorizontalAlignment="Center" Margin="30, -30"
+         FontSize="14" Text="Описание"/>
+      <TextBox x:Name="Description" Text="{Binding Description}"
+               VerticalAlignment="Top" Margin="0, -30, 0, 0" Width="400" Height="220"
+               MaxLength="1000" AcceptsReturn = "True" TextWrapping = "Wrap"/>
+    </StackPanel>
+    <Button Grid.Row="2" Margin="-150, 60, 0, 0"
+            HorizontalAlignment="Center" VerticalAlignment="Center"
+            Content="OK" Width="100" Height="30" HorizontalContentAlignment="Center"
+            Command="{Binding SaveTask}">
+    </Button>
+    <Button Grid.Row="2" Margin="150, 60, 0, 0"
+        HorizontalAlignment="Center" VerticalAlignment="Center"
+        Content="Отмена" Width="100" Height="30" HorizontalContentAlignment="Center"
+        Command="{Binding Cancel}">
+    </Button>
+  </Grid>
+</Window>

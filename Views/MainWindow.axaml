@@ -1,0 +1,94 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Simple_PMS.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Simple_PMS.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Simple PMS"
+        >
+    <Design.DataContext>
+      <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid RowDefinitions="Auto, *">
+      <Border Classes="header" Grid.Row="0" Background="#00C7CA">
+        <TextBlock Text="{Binding WindowTitle}"
+                   HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5"
+                   FontSize="18"/>
+        
+      </Border>
+      <Grid Grid.Row="1" ColumnDefinitions="20*, 20*, 5*, 20*" RowDefinitions="90*, 10*">
+        <ListBox x:Name="UserList" IsVisible="{Binding UserListVisibility}"
+                 Grid.Row="0" Grid.Column="0" Margin="10, 20, 10, 100"
+                 SelectedIndex="{Binding SelectedUserId}" ItemsSource="{Binding SelectedUsers}">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding Name}"/>
+              </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="TaskList" IsVisible="{Binding TaskListVisibility}"
+                 Grid.Row="0" Grid.Column="1" ItemsSource="{Binding UsersTasks}"
+                 Margin="10, 20, 10, 100"
+                 SelectedIndex="{Binding SelectedTaskId}">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding Name}"/>
+                <TextBlock Text="{Binding Description}"/>
+                <Grid ColumnDefinitions="1*, 1*">
+                  <ComboBox Grid.Column="0" Margin="0, 5, 0, 0"
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Width="120" Height="20" FontSize="14"
+                            ItemsSource="{Binding Statuses}" SelectedItem="{Binding CurrentStatus}"/>
+                </Grid>
+              </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:Name="AddBtn" Grid.Row="0" Grid.Column="2" Width="100" Height="30" FontSize="14"
+                VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, -75, 0, 0"
+                HorizontalContentAlignment="Center" IsVisible="{Binding AdminControlVisibility}"
+                Command="{Binding SetTaskOwner}" IsEnabled="False">Назначить</Button>
+        <Button x:Name="RemoveBtn" Grid.Row="0" Grid.Column="2"
+                Width="100" Height="30" FontSize="14"
+                VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, 75, 0, 0"
+                HorizontalContentAlignment="Center" IsEnabled="False"
+                IsVisible="{Binding AdminControlVisibility}"
+                Command="{Binding SetTaskAsFree}">Снять</Button>
+        <ListBox x:Name="FreeTaskList" IsVisible="{Binding AdminControlVisibility}"
+                 Grid.Row="0" Grid.Column="3" ItemsSource="{Binding FreeTasks}"
+                 Margin="10, 20, 10, 100" SelectedIndex="{Binding SelectedTaskId}">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding Name}"/>
+                <TextBlock Text="{Binding Description}"/>
+              </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Grid.Row="1" Grid.Column="3" Width="140" Height="30" FontSize="12"
+                VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, 0, 20, 0"
+                HorizontalContentAlignment="Center"
+                Command="{Binding SaveTaskChanges}">Сохранить</Button>
+        <Button x:Name="AuthBtn" Grid.Row="1" Grid.Column="0" Width="140" Height="30"
+                FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left"
+                Margin="20, 0, 0, 0" HorizontalContentAlignment="Center"
+                Content="Вход"/>
+        <Button x:Name="NewTaskBtn" Grid.Row="1" Grid.Column="2" Width="140" Height="30"
+                FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left"
+                HorizontalContentAlignment="Center"
+                Content="Новый таск" IsVisible="{Binding AdminControlVisibility}"/>
+        <Button x:Name="NewUserBtn" Grid.Row="1" Grid.Column="1" Width="140" Height="30"
+                FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left"
+                HorizontalContentAlignment="Center"
+                Content="Новый пользователь" IsVisible="{Binding AdminControlVisibility}"/>
+      </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:Simple_PMS.ViewModels"
+        mc:Ignorable="d" Width="400" Height="200"
+        x:Class="Simple_PMS.Views.AuthWindow"
+        x:DataType="vm:AuthWindowViewModel"
+        Title="Авторизация"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Assets/avalonia-logo.ico">
+  <Design.DataContext>
+    <vm:AuthWindowViewModel/>
+  </Design.DataContext>
+
+  <Grid Margin="5" RowDefinitions="30*, 30*, 30*, 30*">
+    <TextBlock Grid.Row="0"
+             Text="{Binding WindowText}"
+             HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10"
+             FontSize="16"/>
+    <TextBox Text="{Binding Username}" Grid.Row="1" VerticalAlignment="Center" Margin="80, 0, 80, 0"/>
+    <TextBox Text="{Binding Password}" Grid.Row="2" VerticalAlignment="Center" Margin="80, 0, 80, 0"/>
+    <Button Grid.Row="3" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+            Content="OK" Width="100" Height="30" HorizontalContentAlignment="Center"
+            Command="{Binding Login}">
+    </Button>
+  </Grid>
+</Window>
